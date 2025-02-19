@@ -18,5 +18,14 @@
     "url": "https://github.com/erazero1/AnimeVerse/issues"
   },
   "homepage": "https://github.com/erazero1/AnimeVerse#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.10.1"
+  }
 }
