@@ -1,0 +1,83 @@
+[
+    {
+      "_id": "ObjectId('5bd761dcae323e45a93ccfed')",
+      "releaseDate": "2015-09-02T16:11:59.565+00:00",
+      "items": [
+        {
+          "title": "Attack on Titan",
+          "genres": ["action", "drama", "military"],
+          "rating": 9.1,
+          "episodes": 25
+        },
+        {
+          "title": "Attack on Titan Season 2",
+          "genres": ["action", "drama", "military"],
+          "rating": 8.9,
+          "episodes": 12
+        }
+      ],
+      "studioLocation": "Tokyo, Japan",
+      "director": {
+        "name": "Tetsurō Araki",
+        "age": 52,
+        "email": "tetsuro.araki@example.com",
+        "satisfaction": 5
+      },
+      "awardWon": true,
+      "streamingPlatform": "Crunchyroll"
+    },
+    {
+      "_id": "ObjectId('5bd761dcae323e45a93ccfee')",
+      "releaseDate": "2013-04-06T10:00:00.000+00:00",
+      "items": [
+        {
+          "title": "My Hero Academia",
+          "genres": ["action", "superpower", "school"],
+          "rating": 8.8,
+          "episodes": 25
+        },
+        {
+          "title": "My Hero Academia Season 2",
+          "genres": ["action", "superpower", "school"],
+          "rating": 8.7,
+          "episodes": 25
+        }
+      ],
+      "studioLocation": "Osaka, Japan",
+      "director": {
+        "name": "Kenji Nagasaki",
+        "age": 49,
+        "email": "kenji.nagasaki@example.com",
+        "satisfaction": 4
+      },
+      "awardWon": false,
+      "streamingPlatform": "Funimation"
+    },
+    {
+      "_id": "ObjectId('5bd761dcae323e45a93ccfef')",
+      "releaseDate": "2016-01-08T08:00:00.000+00:00",
+      "items": [
+        {
+          "title": "Re:Zero - Starting Life in Another World",
+          "genres": ["fantasy", "psychological", "drama"],
+          "rating": 9.0,
+          "episodes": 25
+        },
+        {
+          "title": "Re:Zero - Starting Life in Another World Season 2",
+          "genres": ["fantasy", "psychological", "drama"],
+          "rating": 8.9,
+          "episodes": 25
+        }
+      ],
+      "studioLocation": "Kyoto, Japan",
+      "director": {
+        "name": "Masaharu Watanabe",
+        "age": 50,
+        "email": "masaharu.watanabe@example.com",
+        "satisfaction": 5
+      },
+      "awardWon": true,
+      "streamingPlatform": "Crunchyroll"
+    }
+  ]
