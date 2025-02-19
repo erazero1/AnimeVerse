@@ -1,0 +1,22 @@
+{
+  "name": "animeverse",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erazero1/AnimeVerse.git"
+  },
+  "keywords": [
+    "animeverse-git"
+  ],
+  "author": "erazero1, Dari4ok, Mukhamedyakub",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erazero1/AnimeVerse/issues"
+  },
+  "homepage": "https://github.com/erazero1/AnimeVerse#readme",
+  "description": ""
+}
