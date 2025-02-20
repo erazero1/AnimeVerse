@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Anime</title>
+  <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">
+      LOGO
+    </div>
+    <nav class="main-nav">
+      <div class="auth-buttons">
+        <a href="#" class="btn login-btn">Login</a>
+        <a href="#" class="btn signup-btn">Sign Up</a>
+      </div>
+      <!-- 
+        <div class="user-menu">
+          <a href="#" class="btn profile-btn">Profile</a>
+          <a href="#" class="btn my-list-btn">My list</a>
+        </div>
+      -->
+    </nav>
+  </header>
+
+  <main>
+    <section class="filters">
+        <h2>Filters</h2>
+        
+        <div class="filter-block">
+          <h3>Status</h3>
+          <label><input type="checkbox" name="status" value="ongoing"> Ongoing</label>
+          <label><input type="checkbox" name="status" value="announce"> Announce</label>
+          <label><input type="checkbox" name="status" value="completed"> Completed</label>
+        </div>
+        
+        <div class="filter-block">
+          <h3>Type</h3>
+          <label><input type="checkbox" name="type" value="tv-show"> TV Show</label>
+          <label><input type="checkbox" name="type" value="movie"> Movie</label>
+          <label><input type="checkbox" name="type" value="ova"> OVA</label>
+          <label><input type="checkbox" name="type" value="ona"> ONA</label>
+          <label><input type="checkbox" name="type" value="special"> Special</label>
+          <label><input type="checkbox" name="type" value="tv-special"> TV Special</label>
+        </div>
+      
+        <div class="filter-block">
+          <h3>In My List</h3>
+          <label><input type="checkbox" name="my-list" value="planned"> Planned</label>
+          <label><input type="checkbox" name="my-list" value="completed"> Completed</label>
+          <label><input type="checkbox" name="my-list" value="watching"> Watching</label>
+          <label><input type="checkbox" name="my-list" value="dropped"> Dropped</label>
+          <label><input type="checkbox" name="my-list" value="postponed"> Postponed</label>
+        </div>
+        
+        <div class="filter-block">
+          <h3>Sorting</h3>
+          <label><input type="radio" name="sorting" value="rating"> In rating order</label>
+          <label><input type="radio" name="sorting" value="popularity"> In popularity order</label>
+          <label><input type="radio" name="sorting" value="date"> In date order</label>
+        </div>
+        
+        <div class="filter-block">
+          <h3>Year</h3>
+          <input type="text" name="year" placeholder="From..."> <input type="text" name="year" placeholder="to...">
+        </div>
+        <div class="filter-block">
+          <h3>Episodes</h3>
+          <input type="text" name="episodes" placeholder="Number of episodes...">
+        </div>
+        <div class="filter-block">
+          <h3>Duration</h3>
+          <input type="text" name="duration" placeholder="Duration in minutes...">
+        </div>
+        
+        <button class="apply-filters">Apply Filters</button>
+      </section>
+      
+    
+      <section class="anime-list">
+        <h2>All Anime</h2>
+    
+        <div class="anime-grid">
+          <a href="anime-details.html" class="anime-card">
+            <img src="https://cdn.myanimelist.net/images/anime/1448/147351l.jpg" alt="One Piece Cover">
+            <h3 class="anime-title">One Piece: Adventures in the Grand Line</h3>
+            <div class="anime-meta">
+              <span class="anime-type">TV Show</span>
+              <span class="anime-year">1999</span>
+            </div>
+            
+            <div class="anime-details">
+              <h3 class="full-title">One Piece: Adventures in the Grand Line</h3>
+              <p class="detail-type"><strong>Type:</strong> TV Show</p>
+              <p class="detail-studio"><strong>Studio:</strong> Toei Animation</p>
+              <p class="detail-episodes"><strong>Episodes:</strong> 1000+</p>
+              <p class="detail-genres"><strong>Genres:</strong> Action, Adventure, Fantasy</p>
+            </div>
+          </a>
+          
+        </div>
+        <div class="pagination">
+            <a href="#">&laquo; Prev</a>
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">Next &raquo;</a>
+        </div>
+    </section>
+  </main>
+  <script src="../js/index.js"></script>
+</body>
+</html>

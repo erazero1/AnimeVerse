@@ -1,0 +1,281 @@
+/* Сброс и базовые настройки */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  /* Шапка сайта */
+  .site-header {
+    display: flex;
+    align-items: center;
+    background-color: #1e1e2f;
+    padding: 10px 20px;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  /* Основная навигация */
+  .main-nav {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  
+  .nav-links li a:hover {
+    color: #ffd700;
+  }
+  
+  /* Кнопки аутентификации */
+  .auth-buttons,
+  .user-menu {
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+  }
+  
+  .btn {
+    border: 1px solid #fff;
+    background: none;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  .btn:hover {
+    background-color: #fff;
+    color: #1e1e2f;
+  }
+  
+  .signup-btn {
+    border-color: #ffd700;
+    color: #ffd700;
+  }
+  
+  .signup-btn:hover {
+    background-color: #ffd700;
+    color: #1e1e2f;
+  }
+  
+  /* Основной контейнер для основного содержимого */
+  main {
+    position: relative; 
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  /* Боковая панель фильтров – абсолютно позиционированная слева */
+  .filters {
+    position: absolute;
+    left: 0px;
+    top: 20px;
+    width: 220px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  }
+  
+  .filters h2 {
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+  
+  .filter-block {
+    margin-bottom: 15px;
+  }
+  
+  .filter-block h3 {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .filter-block label {
+    display: block;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .filter-block input[type="checkbox"],
+  .filter-block input[type="radio"] {
+    margin-right: 6px;
+  }
+  
+  .filter-block input[type="text"] {
+    width: 100%;
+    padding: 6px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .apply-filters {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #1e1e2f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  
+  .apply-filters:hover {
+    background-color: #ffd700;
+    color: #1e1e2f;
+  }
+  
+  .anime-list {
+    margin-left: 230px; 
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  }
+  
+  .anime-list h2 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  .anime-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  
+  .anime-card {
+    display: block;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    position: relative; 
+  }
+  
+  
+  .anime-card img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: contain;
+    background-color: #eaeaea;
+  }
+  
+  
+  .anime-title {
+    font-size: 14px;
+    margin: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+ 
+  .anime-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 8px;
+  }
+  
+  .anime-type,
+  .anime-year {
+    font-size: 12px;
+    color: #777;
+  }
+
+  
+.anime-details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.anime-card:hover .anime-details {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.anime-details .full-title {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.anime-details p {
+  font-size: 12px;
+  margin: 4px 0;
+}
+  
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 5px;
+}
+
+.pagination a {
+  padding: 8px 12px;
+  background-color: #fff;
+  color: #1e1e2f;
+  border: 1px solid #ddd;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.pagination a:hover {
+  background-color: #ffd700;
+  color: #1e1e2f;
+}
+
+.pagination a.active {
+  background-color: #1e1e2f;
+  color: #fff;
+  border-color: #1e1e2f;
+}
+
