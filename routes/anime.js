@@ -1,20 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const animeController = require("../controllers/animeController");
+const { authenticateUser, authorizeAdmin } = require("../middlewares/auth");
 
-// Create a new anime
-router.post("/", animeController.createAnime);
-
-// Get all anime
+router.post("/", authenticateUser, authorizeAdmin, animeController.createAnime);
 router.get("/", animeController.getAnimes);
-
-// Get an anime by ID
-router.get("/:id", animeController.getAnimeById);
-
-// Update an anime by ID
-router.put("/:id", animeController.updateAnime);
-
-// Delete an anime by ID
-router.delete("/:id", animeController.deleteAnime);
+router.delete("/:id", authenticateUser, authorizeAdmin, animeController.deleteAnime);
+router.get("/analytics", authenticateUser, authorizeAdmin, animeController.getAnalytics);
 
 module.exports = router;

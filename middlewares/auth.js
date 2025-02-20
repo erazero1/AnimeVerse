@@ -1,18 +1,20 @@
-// middlewares/auth.js
 const jwt = require("jsonwebtoken");
-const secretKey = process.env.JWT_SECRET || "secretkey";
 
-module.exports = (req, res, next) => {
-  const authHeader = req.header("Authorization");
-  const token = authHeader && authHeader.split(" ")[1]; // Expecting format: Bearer <token>
-  if (!token) {
-    return res.status(401).json({ error: "No token, authorization denied" });
-  }
+exports.authenticateUser = (req, res, next) => {
+  const token = req.header("Authorization");
+  if (!token) return res.status(401).json({ error: "Access Denied" });
+
   try {
-    const decoded = jwt.verify(token, secretKey);
-    req.user = decoded; // Attach user info to request
+    const verified = jwt.verify(token.replace("Bearer ", ""), "secret");
+    req.user = verified;
     next();
   } catch (err) {
-    res.status(401).json({ error: "Token is not valid" });
+    res.status(401).json({ error: "Invalid token" });
   }
+};
+
+exports.authorizeAdmin = (req, res, next) => {
+  if (req.user.role !== "admin")
+    return res.status(403).json({ error: "Forbidden: Admins only" });
+  next();
 };

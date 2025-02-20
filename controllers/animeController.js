@@ -1,18 +1,18 @@
 const Anime = require("../models/Anime");
+const User = require("../models/User");
 
-// Create a new anime
+// Admin: Create anime
 exports.createAnime = async (req, res) => {
-  const { name, price, description, category, stockQuantity, images } = req.body;
   try {
-    const anime = new Anime({ name, price, description, category, stockQuantity, images });
+    const anime = new Anime(req.body);
     await anime.save();
-    res.status(201).json({ message: "Anime created successfully", anime });
+    res.status(201).json({ message: "Anime added", anime });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-// Retrieve all anime
+// Get all animes (open for all users)
 exports.getAnimes = async (req, res) => {
   try {
     const animes = await Anime.find();
@@ -22,36 +22,37 @@ exports.getAnimes = async (req, res) => {
   }
 };
 
-// Retrieve a single anime by ID
-exports.getAnimeById = async (req, res) => {
-  try {
-    const anime = await Anime.findById(req.params.id);
-    if (!anime) return res.status(404).json({ error: "Anime not found" });
-    res.status(200).json({ anime });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
-// Update an anime by ID
-exports.updateAnime = async (req, res) => {
-  try {
-    const updatedAnime = await Anime.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    if (!updatedAnime) return res.status(404).json({ error: "Anime not found" });
-    res.status(200).json({ message: "Anime updated successfully", anime: updatedAnime });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
-// Delete an anime by ID
+// Admin: Delete anime
 exports.deleteAnime = async (req, res) => {
   try {
-    const deletedAnime = await Anime.findByIdAndDelete(req.params.id);
-    if (!deletedAnime) return res.status(404).json({ error: "Anime not found" });
-    res.status(200).json({ message: "Anime deleted successfully" });
+    await Anime.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "Anime deleted" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// **Analytics Dashboard for Admins**
+exports.getAnalytics = async (req, res) => {
+  try {
+    const totalSales = await User.aggregate([
+      { $unwind: "$activityLogs" },
+      { $match: { "activityLogs.action": "purchase" } },
+      { $count: "totalSales" },
+    ]);
+
+    const mostViewedAnime = await User.aggregate([
+      { $unwind: "$activityLogs" },
+      { $match: { "activityLogs.action": "view" } },
+      { $group: { _id: "$activityLogs.animeId", views: { $sum: 1 } } },
+      { $sort: { views: -1 } },
+      { $limit: 1 },
+    ]);
+
+    res.status(200).json({
+      totalSales: totalSales[0]?.totalSales || 0,
+      mostViewedAnime: mostViewedAnime[0] || "No data yet",
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
