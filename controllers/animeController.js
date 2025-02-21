@@ -15,12 +15,28 @@ exports.createAnime = async (req, res) => {
 // Get all animes (open for all users)
 exports.getAnimes = async (req, res) => {
   try {
-    const animes = await Anime.find();
-    res.status(200).json({ animes });
+    const page = parseInt(req.query.page, 10) || 1; 
+    const limit = parseInt(req.query.limit, 10) || 20;
+    const skipCount = (page - 1) * limit;
+
+    const totalCount = await Anime.countDocuments({});
+    const totalPages = Math.ceil(totalCount / limit);
+    
+    const animes = await Anime.find()
+      .skip(skipCount)
+      .limit(limit);
+      
+    res.status(200).json({
+      animes,
+      totalPages,
+      currentPage: page,
+      totalCount
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+
 
 // Admin: Delete anime
 exports.deleteAnime = async (req, res) => {
@@ -57,3 +73,88 @@ exports.getAnalytics = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+
+// controllers/animeController.js
+
+exports.filterAnimes = async (req, res) => {
+  try {
+    const { 
+      status, 
+      type, 
+      myList, 
+      sorting, 
+      yearFrom, 
+      yearTo, 
+      episodes, 
+      duration,
+      page,
+      limit
+    } = req.body;
+
+    // 1) Собираем query для фильтра (пример, как раньше)
+    const query = {};
+
+    if (Array.isArray(status) && status.length > 0) {
+      query.status = { $in: status };
+    }
+    if (Array.isArray(type) && type.length > 0) {
+      query.Type = { $in: type };
+    }
+    if (yearFrom && yearTo) {
+      const from = parseInt(yearFrom, 10);
+      const to = parseInt(yearTo, 10);
+      if (!isNaN(from) && !isNaN(to)) {
+        query.Year = { $gte: from, $lte: to };
+      }
+    }
+    if (episodes) {
+      const ep = parseInt(episodes, 10);
+      if (!isNaN(ep)) {
+        query.Episodes = { $gte: ep };
+      }
+    }
+    if (duration) {
+      const dur = parseInt(duration, 10);
+      if (!isNaN(dur)) {
+        query.Duration = { $gte: dur };
+      }
+    }
+
+    // 2) Сортировка
+    let sortObj = {};
+    if (sorting === "rating") {
+      sortObj.Score = -1;
+    } else if (sorting === "date") {
+      // сортируем по дате создания, можно и по году
+      sortObj.createdAt = -1;
+    }
+
+    // 3) Пагинация (page, limit)
+    const currentPage = parseInt(page, 10) || 1;     // если не указано, страница = 1
+    const perPage = parseInt(limit, 10) || 20;      // если не указано, лимит = 20
+
+    const skipCount = (currentPage - 1) * perPage;
+
+    // 4) Считаем общее кол-во для totalPages
+    const totalCount = await Anime.countDocuments(query);
+    const totalPages = Math.ceil(totalCount / perPage);
+
+    // 5) Достаём нужную страницу
+    const animes = await Anime.find(query)
+      .sort(sortObj)
+      .skip(skipCount)
+      .limit(perPage);
+
+    // 6) Возвращаем массив и метаданные пагинации
+    res.status(200).json({
+      animes,
+      totalPages,
+      currentPage,
+      totalCount
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+

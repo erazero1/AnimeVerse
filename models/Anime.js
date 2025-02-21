@@ -20,7 +20,6 @@ const animeSchema = new mongoose.Schema(
 );
 
 
-// Create a text index for full-text search on name, description, and category.
 animeSchema.index({ name: "text", description: "text", category: "text" });
 
 module.exports = mongoose.model("Anime", animeSchema);
