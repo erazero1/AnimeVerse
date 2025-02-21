@@ -1,5 +1,6 @@
 const Anime = require("../models/Anime");
 const User = require("../models/User");
+const { logUserActivity } = require("../helpers/activityLogger")
 
 // Admin: Create anime
 exports.createAnime = async (req, res) => {
@@ -12,37 +13,51 @@ exports.createAnime = async (req, res) => {
   }
 };
 
-// Get all animes (open for all users)
-exports.getAnimes = async (req, res) => {
+// For searching an anime by title
+exports.getAnimeByTitle = async (req, res) => {
   try {
-    if (req.query.title){
-      let title = req.query.title || '';
-      title = title.replace(/^["']|["']$/g, '');
-      const anime = await Anime.findOne({ title: new RegExp(`^${title}$`, 'i') });
-      res.status(200).json(anime);
-    } else {
-      const page = parseInt(req.query.page, 10) || 1; 
-      const limit = parseInt(req.query.limit, 10) || 20;
-      const skipCount = (page - 1) * limit;
-
-      const totalCount = await Anime.countDocuments({});
-      const totalPages = Math.ceil(totalCount / limit);
-      
-      const animes = await Anime.find()
-        .skip(skipCount)
-        .limit(limit);
-        
-      res.status(200).json({
-        animes,
-        totalPages,
-        currentPage: page,
-        totalCount
-      });
+    let title = req.query.title || '';
+    // Remove any surrounding quotes if present
+    title = title.replace(/^["']|["']$/g, '');
+    const anime = await Anime.findOne({ title: new RegExp(`^${title}$`, 'i') });
+    if (!anime) {
+      return res.status(404).json({ error: "Anime not found" });
     }
+    if (req.user) {
+      await logUserActivity(req.user.id, "view", anime._id);
+      await logUserActivity(req.user.id, "search", anime._id);
+    }
+    res.status(200).json(anime);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+
+// For retrieving a paginated list of animes
+exports.getAnimes = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = parseInt(req.query.limit, 10) || 20;
+    const skipCount = (page - 1) * limit;
+
+    const totalCount = await Anime.countDocuments({});
+    const totalPages = Math.ceil(totalCount / limit);
+    
+    const animes = await Anime.find()
+      .skip(skipCount)
+      .limit(limit);
+      
+    res.status(200).json({
+      animes,
+      totalPages,
+      currentPage: page,
+      totalCount
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 
 
 // Admin: Delete anime

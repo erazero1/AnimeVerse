@@ -8,7 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    fetch(`/api/animes/?title=${title}`)
+    fetch(`/api/animes/search?title=${title}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': localStorage.getItem('token')
+        }
+    })
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error fetching anime: ${response.status}`);
