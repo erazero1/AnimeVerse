@@ -15,26 +15,18 @@
 
       <div class="filter-block">
         <h3>Status</h3>
-        <label><input type="checkbox" name="status" value="ongoing"> Ongoing</label>
-        <label><input type="checkbox" name="status" value="announce"> Announce</label>
-        <label><input type="checkbox" name="status" value="completed"> Completed</label>
+        <label><input type="checkbox" name="status" value="Currently Airing">Currently Airing</label>
+        <label><input type="checkbox" name="status" value="announce">Announce</label>
+        <label><input type="checkbox" name="status" value="Finished Airing">Finished Airing</label>
       </div>
 
       <div class="filter-block">
         <h3>Type</h3>
-        <label><input type="checkbox" name="type" value="TV"> TV Show</label>
-        <label><input type="checkbox" name="type" value="Movie"> Movie</label>
-        <label><input type="checkbox" name="type" value="OVA"> OVA</label>
-        <label><input type="checkbox" name="type" value="ONA"> ONA</label>
-      </div>
-
-      <div class="filter-block">
-        <h3>In My List</h3>
-        <label><input type="checkbox" name="my-list" value="planned"> Planned</label>
-        <label><input type="checkbox" name="my-list" value="completed"> Completed</label>
-        <label><input type="checkbox" name="my-list" value="watching"> Watching</label>
-        <label><input type="checkbox" name="my-list" value="dropped"> Dropped</label>
-        <label><input type="checkbox" name="my-list" value="postponed"> Postponed</label>
+        <label><input type="checkbox" name="type" value="TV">TV Show</label>
+        <label><input type="checkbox" name="type" value="Movie">Movie</label>
+        <label><input type="checkbox" name="type" value="OVA">OVA</label>
+        <label><input type="checkbox" name="type" value="ONA">ONA</label>
+        
       </div>
 
       <div class="filter-block">
@@ -64,24 +56,14 @@
     <section class="anime-list">
       <h2>All Anime</h2>
 
+      <div class="search-container">
+        <input type="text" id="searchQuery" placeholder="Search by title...">
+        <button id="searchBtn" class="btn">Search</button>
+      </div>
+      
+
       <div class="anime-grid">
-        <a href="#" class="anime-card">
-          <img src="https://cdn.myanimelist.net/images/anime/1448/147351l.jpg" alt="One Piece Cover">
-          <h3 class="anime-title">One Piece: Adventures in the Grand Line</h3>
-          <div class="anime-meta">
-            <span class="anime-type">TV Show</span>
-            <span class="anime-year">1999</span>
-          </div>
-
-          <div class="anime-details">
-            <h3 class="full-title">One Piece: Adventures in the Grand Line</h3>
-            <p class="detail-type"><strong>Type:</strong> TV Show</p>
-            <p class="detail-studio"><strong>Studio:</strong> Toei Animation</p>
-            <p class="detail-episodes"><strong>Episodes:</strong> 1000+</p>
-            <p class="detail-genres"><strong>Genres:</strong> Action, Adventure, Fantasy</p>
-          </div>
-        </a>
-
+        
       </div>
       <div class="pagination">
         <a href="#">&laquo; Prev</a>

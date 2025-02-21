@@ -6,11 +6,38 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentPage = 1;
   let totalPages = 1;
 
+  const searchBtn = document.getElementById('searchBtn');
+  const searchQuery = document.getElementById('searchQuery');
+
+  if (searchBtn && searchQuery) {
+    searchBtn.addEventListener('click', () => {
+      const query = searchQuery.value.trim();
+      if (!query) {
+        fetchAllAnime();
+      } else {
+        fetch(`/api/animes/search?title=${encodeURIComponent(query)}`)
+          .then(res => {
+            if (!res.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return res.json();
+          })
+          .then(data => {
+            // Если найден хотя бы один результат, отрисовываем таблицу
+            renderAnimeCards(data.animes);
+            // Для поиска можно не использовать пагинацию, или ее можно сбросить
+            paginationContainer.innerHTML = '';
+          })
+          .catch(err => console.error('Search error:', err));
+      }
+    });
+  }
+
   fetchAllAnime();
 
   applyFiltersBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    currentPage = 1; 
+    currentPage = 1;
     fetchFilteredAnime();
   });
 
@@ -47,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Fetch error:', error);
       });
   }
-  
+
 
   function fetchFilteredAnime() {
     const filters = getFiltersData();

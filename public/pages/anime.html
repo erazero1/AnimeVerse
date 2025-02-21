@@ -1,78 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <title>Anime Details</title>
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/anime.css" />
+  <meta charset="UTF-8">
+  <title>Anime Details</title>
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/anime.css">
 </head>
-
 <body>
-    <main class="main-container">
-        <!-- Title (e.g. "Solo Leveling 2") -->
-        <h1 class="anime-title" id="animeTitle">Unknown Title</h1>
+  <main class="main-container">
+    <!-- Название аниме -->
+    <h1 class="anime-title" id="animeTitle">Unknown Title</h1>
 
-        <div class="anime-top-block">
-            <!-- Left column: cover and possible actions -->
-            <div class="left-column">
-                <img class="anime-poster" id="animeCover" src="" alt="Anime Cover" />
+    <div class="anime-top-block">
+      <!-- Левая колонка: постер и кнопка добавления -->
+      <div class="left-column">
+        <img class="anime-poster" id="animeCover" src="" alt="Anime Cover">
+        <button class="add-list-btn">+ Add to Cart</button>
+      </div>
 
-                <button class="add-list-btn">+ Add to List</button>
-
-                <!-- Optional icons or actions -->
-                <div class="actions">
-                    <span>♥</span>
-                    <span>★</span>
-                    <span>✎</span>
-                </div>
-            </div>
-
-            <!-- Right column: Info, Score, Studio -->
-            <div class="right-column">
-                <section class="info-block">
-                    <h2>Information</h2>
-                    <ul>
-                        <li><strong>Status:</strong> <span id="animeStatus">-</span></li>
-                        <li><strong>Type:</strong> <span id="animeType">-</span></li>
-                        <li><strong>Year:</strong> <span id="animeYear">-</span></li>
-                        <li><strong>Episodes:</strong> <span id="animeEpisodes">-</span></li>
-                        <li><strong>Duration:</strong> <span id="animeDuration">-</span> min</li>
-                        <li><strong>Studio:</strong> <span id="animeStudio">-</span></li>
-                        <li><strong>Author:</strong> <span id="animeAuthor">-</span></li>
-                        <li><strong>Genres:</strong> <span id="animeGenres">-</span></li>
-                        <li><strong>Rating:</strong> <span id="animeRating">-</span></li>
-                    </ul>
-                </section>
-
-                <section class="score-block">
-                    <h2>Score</h2>
-                    <!-- Stars + numeric score. We'll fill this dynamically in JS, or just show a number. -->
-                    <div class="stars" id="starContainer">
-                        <!-- Example usage:
-               <span class="star full">★</span>
-               <span class="star full">★</span>
-               <span class="star full">★</span>
-               <span class="star half">★</span>
-               <span class="star">★</span>
-          -->
-                    </div>
-                    <div class="score-value">
-                        <span id="animeScore">-</span>
-                    </div>
-                </section>
-            </div>
-        </div>
-
-        <!-- Description -->
-        <section class="description-block">
-            <h2>Description</h2>
-            <p id="animeDescription">No description.</p>
+      <!-- Правая колонка: блок с информацией и рейтинг -->
+      <div class="right-column">
+        <section class="info-block">
+          <h2>Information</h2>
+          <ul>
+            <li><strong>Type:</strong> <span id="animeType">-</span></li>
+            <li><strong>Episodes:</strong> <span id="animeEpisodes">-</span></li>
+            <li><strong>Duration:</strong> <span id="animeDuration">-</span> min</li>
+            <li><strong>Status:</strong> <span id="animeStatus">-</span></li>
+            <li><strong>Year:</strong> <span id="animeYear">-</span></li>
+            <li><strong>Genres:</strong> <span id="animeGenres">-</span></li>
+            <li><strong>Studio:</strong> <span id="animeStudio">-</span></li>
+            <li><strong>Author:</strong> <span id="animeAuthor">-</span></li>
+            <li><strong>Rating:</strong> <span id="animeRating">-</span></li>
+          </ul>
         </section>
-    </main>
 
-    <script src="../js/anime.js"></script>
-    <script src="../js/header.js"></script>
+        <section class="score-block">
+          <h2>Score</h2>
+          <div class="stars" id="starContainer"></div>
+          <div class="score-value">
+            <span id="animeScore">-</span>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Описание (синопсис) -->
+    <section class="description-block">
+      <h2>Description</h2>
+      <p id="animeDescription">No description available.</p>
+    </section>
+  </main>
+
+  <script src="../js/anime.js"></script>
+  <script src="../js/header.js"></script>
 </body>
-
 </html>

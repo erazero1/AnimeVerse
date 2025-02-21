@@ -24,6 +24,31 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentPage = 1;
   let totalPages = 1;
 
+  const searchBtn = document.getElementById('searchBtn');
+  const searchQuery = document.getElementById('searchQuery');
+
+  if (searchBtn && searchQuery) {
+    searchBtn.addEventListener('click', () => {
+      const query = searchQuery.value.trim();
+      if (!query) {
+        fetchAnimeList();
+      } else {
+        fetch(`/api/animes/search?title=${encodeURIComponent(query)}`)
+          .then(res => {
+            if (!res.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return res.json();
+          })
+          .then(data => {
+            renderAnimeList(data.animes);
+            paginationContainer.innerHTML = '';
+          })
+          .catch(err => console.error('Search error:', err));
+      }
+    });
+  }
+
   // При загрузке страницы — получаем список аниме с пагинацией
   fetchAnimeList();
 

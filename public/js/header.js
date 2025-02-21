@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Логотип
   const logo = document.createElement('div');
   logo.className = 'logo';
-  logo.textContent = 'LOGO';
+  logo.textContent = 'AnimeVerse';
   header.appendChild(logo);
 
   // Навигация
