@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     animeGrid.innerHTML = '';
     animeList.forEach(anime => {
       const card = document.createElement('a');
-      card.href = `/title/?title="${anime.title}"`;
+      card.href = `/title/?title=${anime.title}`;
       card.className = 'anime-card';
 
       const img = document.createElement('img');
