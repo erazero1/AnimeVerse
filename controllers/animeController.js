@@ -158,3 +158,12 @@ exports.filterAnimes = async (req, res) => {
   }
 };
 
+exports.getAnimeByTitle = async (req, res) => {
+  try {
+    const anime = await Anime.findOne({title: req.params.title})
+      
+    res.status(200).json({anime});
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
