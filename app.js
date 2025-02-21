@@ -1,8 +1,8 @@
+require('dotenv').config({ path: './secrets.env' });
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const path = require("path")
-require("dotenv").config();
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,7 +14,7 @@ app.use(express.static("public")); // Serve frontend files
 
 // MongoDB Connection
 mongoose
-  .connect("mongodb://127.0.0.1:27017/animeverseDB", {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
