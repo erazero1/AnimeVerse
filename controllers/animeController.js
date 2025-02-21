@@ -19,7 +19,6 @@ exports.getAnimes = async (req, res) => {
     if (req.query.title){
       let title = req.query.title || '';
       title = title.replace(/^["']|["']$/g, '');
-      console.log(title);
       const anime = await Anime.findOne({ title: new RegExp(`^${title}$`, 'i') });
       res.status(200).json(anime);
     } else {
@@ -162,6 +161,23 @@ exports.filterAnimes = async (req, res) => {
       currentPage,
       totalCount
     });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+exports.editAnimeById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedAnime = await Anime.findByIdAndUpdate(
+      id,
+      req.body,
+      { new: true, overwrite: true, runValidators: true }
+    );
+    if (!updatedAnime) {
+      return res.status(404).json({ error: "Anime not found" });
+    }
+    res.status(200).json({ message: "Anime updated successfully", anime: updatedAnime });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

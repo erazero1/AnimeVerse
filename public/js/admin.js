@@ -49,7 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (editMode && editAnimeId) {
       fetch(`/api/animes/${editAnimeId}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+           'Content-Type': 'application/json',
+           'Authorization': localStorage.getItem("token")
+           },
         body: JSON.stringify(animeData)
       })
         .then(res => res.json())
@@ -170,7 +173,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function deleteAnime(id) {
     fetch(`/api/animes/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Authorization': localStorage.getItem('token')
+      }
     })
       .then(res => res.json())
       .then(result => {
