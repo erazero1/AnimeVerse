@@ -1,15 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const animeId = urlParams.get('id');
+    const title = urlParams.get('title');
 
-    if (!animeId) {
+    if (!title) {
         console.error('No anime ID specified in query parameters.');
         return;
     }
 
 
 
-    fetch(`/api/animes/?title="${anime.title}`)
+    fetch(`/api/animes/?title="${title}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error fetching anime: ${response.status}`);
