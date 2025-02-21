@@ -15,23 +15,30 @@ exports.createAnime = async (req, res) => {
 // Get all animes (open for all users)
 exports.getAnimes = async (req, res) => {
   try {
-    const page = parseInt(req.query.page, 10) || 1; 
-    const limit = parseInt(req.query.limit, 10) || 20;
-    const skipCount = (page - 1) * limit;
+    if (req.query.title){
+      let title = req.query.title || '';
+      title = title.replace(/^["']|["']$/g, '');
+      const anime = await Anime.findOne({ title: new RegExp(`^${title}$`, 'i') });
+      res.status(200).json({ anime });
+    } else {
+      const page = parseInt(req.query.page, 10) || 1; 
+      const limit = parseInt(req.query.limit, 10) || 20;
+      const skipCount = (page - 1) * limit;
 
-    const totalCount = await Anime.countDocuments({});
-    const totalPages = Math.ceil(totalCount / limit);
-    
-    const animes = await Anime.find()
-      .skip(skipCount)
-      .limit(limit);
+      const totalCount = await Anime.countDocuments({});
+      const totalPages = Math.ceil(totalCount / limit);
       
-    res.status(200).json({
-      animes,
-      totalPages,
-      currentPage: page,
-      totalCount
-    });
+      const animes = await Anime.find()
+        .skip(skipCount)
+        .limit(limit);
+        
+      res.status(200).json({
+        animes,
+        totalPages,
+        currentPage: page,
+        totalCount
+      });
+    }
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -153,16 +160,6 @@ exports.filterAnimes = async (req, res) => {
       currentPage,
       totalCount
     });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
-exports.getAnimeByTitle = async (req, res) => {
-  try {
-    const anime = await Anime.findOne({title: req.params.title})
-      
-    res.status(200).json({anime});
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
