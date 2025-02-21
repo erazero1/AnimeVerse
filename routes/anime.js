@@ -8,6 +8,5 @@ router.get("/", animeController.getAnimes);
 router.post("/filter", animeController.filterAnimes);
 router.delete("/:id", authenticateUser, authorizeAdmin, animeController.deleteAnime);
 router.get("/analytics", authenticateUser, authorizeAdmin, animeController.getAnalytics);
-router.get("/:title", animeController.getAnimeByTitle);
 
 module.exports = router;

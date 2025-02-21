@@ -38,6 +38,10 @@ app.get("/auth", (req, res) => {
   res.sendFile(path.join(__dirname, "public/pages", "auth.html"))
 });
 
+app.get("/title", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/pages", "anime.html"));
+})
+
 app.get("/admin-panel", (req, res) => {
   res.sendFile(path.join(__dirname, "public/pages", "admin.html"));
 });
