@@ -74,7 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       fetch('/api/animes', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+           'Content-Type': 'application/json',
+           'Authorization': localStorage.getItem('token')
+           },
         body: JSON.stringify(animeData)
       })
         .then(res => res.json())
