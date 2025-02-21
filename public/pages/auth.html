@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login / Register</title>
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-form login-form active">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginUsername">Username</label>
+          <input type="text" id="loginUsername" name="username" placeholder="Enter your username">
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" name="password" placeholder="Enter your password">
+        </div>
+        <button type="submit" class="btn">Login</button>
+      </form>
+      <p class="switch-text">Don't have an account? <a href="#" id="showRegister">Register</a></p>
+    </div>
+
+    <div class="auth-form register-form">
+        <h2>Register</h2>
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="registerEmail">Email</label>
+            <input type="email" id="registerEmail" name="email" placeholder="Enter your email">
+          </div>
+          <div class="form-group">
+            <label for="registerUsername">Username</label>
+            <input type="text" id="registerUsername" name="username" placeholder="Choose a username">
+          </div>
+          <div class="form-group password-group">
+            <label for="registerPassword">Password</label>
+            <div class="input-with-button">
+              <input type="password" id="registerPassword" name="password" placeholder="Enter your password">
+              <button id="toggleRegisterPassword" class="toggle-btn" type="button">Show</button>
+            </div>
+          </div>
+          <div class="form-group password-group">
+            <label for="registerPasswordConfirm">Confirm Password</label>
+            <div class="input-with-button">
+              <input type="password" id="registerPasswordConfirm" name="confirmPassword" placeholder="Repeat your password">
+              <button id="toggleRegisterPasswordConfirm" class="toggle-btn" type="button">Show</button>
+            </div>
+          </div>
+          <div class="form-group verification-group">
+            <label for="registerVerification">Verification</label>
+            <div class="input-with-button">
+              <input type="text" id="registerVerification" name="verification" placeholder="Enter verification code">
+              <button id="getVerificationCode" class="code-btn" type="button">Get Code</button>
+            </div>
+          </div>
+          <button type="submit" class="btn">Register</button>
+        </form>
+        <p class="switch-text">Already have an account? <a href="#" id="showLogin">Login</a></p>
+      </div>
+      
+  </div>
+
+  <script src="../js/auth.js"></script>
+</body>
+</html>

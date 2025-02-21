@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel - Manage Anime</title>
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">
+      ADMIN PANEL
+    </div>
+  </header>
+
+  <div class="admin-container">
+    <h2>Manage Anime List</h2>
+
+    <form id="animeForm" class="anime-form">
+      <h3 id="formTitle">Create New</h3>
+      
+      <div class="form-group">
+        <label for="animeTitle">Title</label>
+        <input type="text" id="animeTitle" name="title" placeholder="Enter title" required>
+      </div>
+
+      <div class="form-group">
+        <label for="animeCover">Cover URL</label>
+        <input type="text" id="animeCover" name="cover" placeholder="Image URL">
+      </div>
+
+      <div class="form-group">
+        <label for="animeStatus">Status</label>
+        <input type="text" id="animeStatus" name="status" placeholder="ongoing, completed, etc.">
+      </div>
+
+      <div class="form-group">
+        <label for="animeType">Type</label>
+        <input type="text" id="animeType" name="type" placeholder="TV, Movie, OVA, etc.">
+      </div>
+
+      <div class="form-group">
+        <label for="animeYear">Year</label>
+        <input type="number" id="animeYear" name="year" placeholder="e.g. 2023">
+      </div>
+
+      <div class="form-group">
+        <label for="animeEpisodes">Episodes</label>
+        <input type="number" id="animeEpisodes" name="episodes" placeholder="e.g. 12">
+      </div>
+
+      <div class="form-group">
+        <label for="animeDuration">Duration</label>
+        <input type="number" id="animeDuration" name="duration" placeholder="Minutes per episode">
+      </div>
+
+      <div class="form-group">
+        <label for="animeStudio">Studio</label>
+        <input type="text" id="animeStudio" name="studio" placeholder="e.g. Toei Animation">
+      </div>
+
+      <div class="form-group">
+        <label for="animeGenres">Genres (comma separated)</label>
+        <input type="text" id="animeGenres" name="genres" placeholder="e.g. Action, Adventure">
+      </div>
+
+      <div class="form-group">
+        <label for="animeAuthor">Author</label>
+        <input type="text" id="animeAuthor" name="author" placeholder="e.g. Eiichiro Oda">
+      </div>
+
+      <div class="form-group">
+        <label for="animeScore">Score</label>
+        <input type="number" step="0.1" id="animeScore" name="score" placeholder="e.g. 8.5">
+      </div>
+
+      <div class="form-group">
+        <label for="animeRating">Rating</label>
+        <input type="text" id="animeRating" name="rating" placeholder="e.g. PG-13">
+      </div>
+
+      <div class="form-group">
+        <label for="animeDescription">Description</label>
+        <textarea id="animeDescription" name="description" placeholder="Description..."></textarea>
+      </div>    
+
+      <button type="submit" class="btn submit-btn">Save</button>
+      <button type="reset" class="btn reset-btn" id="resetFormBtn">Clear</button>
+    </form>
+
+    <div class="anime-list">
+      <table>
+        <thead>
+          <tr>
+            <th>Cover</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Author</th>
+            <th>Year</th>
+            <th>Score</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="animeTableBody">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="../js/admin.js"></script>
+</body>
+</html>
