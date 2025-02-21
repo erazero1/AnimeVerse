@@ -17,9 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const ratingField = document.getElementById('animeRating');
 
   const animeTableBody = document.getElementById('animeTableBody');
+  const paginationContainer = document.getElementById('pagination');
+
   let editMode = false;
   let editAnimeId = null;
+  let currentPage = 1;
+  let totalPages = 1;
 
+  // При загрузке страницы — получаем список аниме с пагинацией
   fetchAnimeList();
 
   animeForm.addEventListener('submit', (e) => {
@@ -50,9 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
       fetch(`/api/animes/${editAnimeId}`, {
         method: 'PUT',
         headers: {
-           'Content-Type': 'application/json',
-           'Authorization': localStorage.getItem("token")
-           },
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem("token")
+        },
         body: JSON.stringify(animeData)
       })
         .then(res => res.json())
@@ -92,12 +97,16 @@ document.addEventListener('DOMContentLoaded', () => {
     resetForm();
   });
 
+  // Функция получения списка аниме с пагинацией
   function fetchAnimeList() {
-    fetch('/api/animes')
+    // Запрос с использованием query-параметров page и limit (например, 20 записей на страницу)
+    fetch(`/api/animes?page=${currentPage}&limit=20`)
       .then(res => res.json())
       .then(data => {
-        console.log(data.animes)
+        totalPages = data.totalPages;
+        currentPage = data.currentPage;
         renderAnimeList(data.animes);
+        renderPagination();
       })
       .catch(err => {
         console.error('Error fetching anime list:', err);
@@ -106,11 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderAnimeList(animeArray) {
     animeTableBody.innerHTML = '';
-    console.log(animeArray);
-
     animeArray.forEach(item => {
-      console.log();
-
       const row = document.createElement('tr');
 
       const coverCell = document.createElement('td');
@@ -137,7 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
       authorCell.textContent = item.Author || 'N/A';
       row.appendChild(authorCell);
 
-      // YEA
       const yearCell = document.createElement('td');
       yearCell.textContent = item.Year || 'N/A';
       row.appendChild(yearCell);
@@ -168,6 +172,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
       row.appendChild(actionsCell);
       animeTableBody.appendChild(row);
+    });
+  }
+
+  function renderPagination() {
+    const paginationHTML = `
+      <button class="prev-page">Prev</button>
+      <span>Page ${currentPage} of ${totalPages}</span>
+      <button class="next-page">Next</button>
+    `;
+    paginationContainer.innerHTML = paginationHTML;
+
+    const prevBtn = paginationContainer.querySelector('.prev-page');
+    const nextBtn = paginationContainer.querySelector('.next-page');
+
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        fetchAnimeList();
+      }
+    });
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        fetchAnimeList();
+      }
     });
   }
 
@@ -214,7 +243,6 @@ document.addEventListener('DOMContentLoaded', () => {
     editMode = false;
     editAnimeId = null;
     formTitle.textContent = 'Create New Anime';
-
     animeForm.reset();
   }
 });

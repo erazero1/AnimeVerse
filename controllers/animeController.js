@@ -15,7 +15,6 @@ exports.createAnime = async (req, res) => {
 // Get all animes (open for all users)
 exports.getAnimes = async (req, res) => {
   try {
-    console.log(req.query.title);
     if (req.query.title){
       let title = req.query.title || '';
       title = title.replace(/^["']|["']$/g, '');
