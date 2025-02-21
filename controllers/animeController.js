@@ -21,7 +21,7 @@ exports.getAnimes = async (req, res) => {
       title = title.replace(/^["']|["']$/g, '');
       console.log(title);
       const anime = await Anime.findOne({ title: new RegExp(`^${title}$`, 'i') });
-      res.status(200).json({ anime });
+      res.status(200).json(anime);
     } else {
       const page = parseInt(req.query.page, 10) || 1; 
       const limit = parseInt(req.query.limit, 10) || 20;
