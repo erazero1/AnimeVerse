@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
           if (data.success) {
             alert('Login successful!');
+            window.location.href = "/";
           } else {
             alert('Login failed: ' + data.message);
           }

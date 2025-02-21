@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const filters = getFiltersData();
       
-      fetch('/api/anime', {
+      fetch('/api/animes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   
     function fetchAllAnime() {
-      fetch('/api/anime')
+      fetch('/api/animes')
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
           return response.json();
         })
         .then(data => {
-          renderAnimeCards(data);
+          renderAnimeCards(data.animes);
         })
         .catch(error => {
           console.error('Fetch error:', error);
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.className = 'anime-card';
   
         const img = document.createElement('img');
-        img.src = anime.image;
+        img.src = anime.cover;
         img.alt = `${anime.title} Cover`;
         card.appendChild(img);
   
@@ -97,12 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
   
         const typeSpan = document.createElement('span');
         typeSpan.className = 'anime-type';
-        typeSpan.textContent = anime.type;
+        typeSpan.textContent = anime.Type;
         meta.appendChild(typeSpan);
   
         const yearSpan = document.createElement('span');
         yearSpan.className = 'anime-year';
-        yearSpan.textContent = anime.year;
+        yearSpan.textContent = anime.Year;
         meta.appendChild(yearSpan);
   
         card.appendChild(meta);
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
         const fullTitle = document.createElement('h3');
         fullTitle.className = 'full-title';
-        fullTitle.textContent = anime.fullTitle;
+        fullTitle.textContent = anime.title;
         details.appendChild(fullTitle);
   
         const typeDetail = document.createElement('p');
@@ -122,17 +122,17 @@ document.addEventListener('DOMContentLoaded', () => {
   
         const studioDetail = document.createElement('p');
         studioDetail.className = 'detail-studio';
-        studioDetail.innerHTML = `<strong>Studio:</strong> ${anime.studio}`;
+        studioDetail.innerHTML = `<strong>Studio:</strong> ${anime.Studio}`;
         details.appendChild(studioDetail);
   
         const episodesDetail = document.createElement('p');
         episodesDetail.className = 'detail-episodes';
-        episodesDetail.innerHTML = `<strong>Episodes:</strong> ${anime.episodes}`;
+        episodesDetail.innerHTML = `<strong>Episodes:</strong> ${anime.Episodes}`;
         details.appendChild(episodesDetail);
   
         const genresDetail = document.createElement('p');
         genresDetail.className = 'detail-genres';
-        genresDetail.innerHTML = `<strong>Genres:</strong> ${anime.genres.join(', ')}`;
+        genresDetail.innerHTML = `<strong>Genres:</strong> ${anime.Genres.join(', ')}`;
         details.appendChild(genresDetail);
   
         card.appendChild(details);

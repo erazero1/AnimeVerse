@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   
       if (editMode && editAnimeId) {
-        fetch(`/api/admin/anime/${editAnimeId}`, {
+        fetch(`/api/animes/${editAnimeId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(animeData)
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(err => console.error(err));
       } else {
-        fetch('/api/admin/anime', {
+        fetch('/api/animes', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(animeData)
@@ -90,10 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   
     function fetchAnimeList() {
-      fetch('/api/admin/anime')
+      fetch('/api/animes')
         .then(res => res.json())
         .then(data => {
-          renderAnimeList(data);
+          console.log(data.animes)
+          renderAnimeList(data.animes);
         })
         .catch(err => {
           console.error('Error fetching anime list:', err);
@@ -102,8 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
   
     function renderAnimeList(animeArray) {
       animeTableBody.innerHTML = '';
+      console.log(animeArray);
   
       animeArray.forEach(item => {
+        console.log();
+        
         const row = document.createElement('tr');
   
         const coverCell = document.createElement('td');
@@ -165,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   
     function deleteAnime(id) {
-      fetch(`/api/admin/anime/${id}`, {
+      fetch(`/api/animes/${id}`, {
         method: 'DELETE'
       })
         .then(res => res.json())

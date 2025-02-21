@@ -38,6 +38,10 @@ app.get("/auth", (req, res) => {
   res.sendFile(path.join(__dirname, "public/pages", "auth.html"))
 });
 
+app.get("/admin-panel", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/pages", "admin.html"));
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
