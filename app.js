@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path")
 require("dotenv").config();
 
 const app = express();
@@ -25,16 +26,18 @@ const authRoutes = require("./routes/auth");
 const animeRoutes = require("./routes/anime");
 const orderRoutes = require("./routes/order");
 
-app.use("/api/auth", authRoutes);
+app.use("/api/", authRoutes);
 app.use("/api/animes", animeRoutes);
 app.use("/api/orders", orderRoutes);
 
-// Test Route
 app.get("/", (req, res) => {
-  res.send("Anime Catalogue API is running...");
+  res.sendFile(path.join(__dirname, "public/pages", "index.html"))
 });
 
-// Start Server
+app.get("/auth", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/pages", "auth.html"))
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
