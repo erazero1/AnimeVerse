@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    fetch(`/api/anime/${animeId}`)
+    fetch(`/api/animes/?title="${anime.title}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error fetching anime: ${response.status}`);
