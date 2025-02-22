@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart</title>
+  <link rel="stylesheet" href="../css/header.css" />
+  <link rel="stylesheet" href="../css/cart.css" />
+</head>
+<body>
+  <div class="cart-container">
+    <h2>Your Cart</h2>
+    
+    <!-- Секция со списком аниме -->
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Cover</th>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody id="cartItems"></tbody>
+    </table>
+
+    <!-- Блок суммарной информации и кнопки Checkout -->
+    <div class="cart-actions">
+      <div class="cart-total">
+        <span>Total: $</span><span id="cartTotal">0</span>
+      </div>
+      <button id="checkoutBtn" class="btn checkout-btn">Checkout</button>
+    </div>
+  </div>
+
+  <script src="../js/cart.js"></script>
+  <script src="../js/header.js"></script>
+</body>
+</html>

@@ -6,10 +6,8 @@ const orderSchema = new mongoose.Schema(
     animes: [
       {
         anime: { type: mongoose.Schema.Types.ObjectId, ref: "Anime", required: true },
-        quantity: { type: Number, default: 1 },
       },
     ],
-    totalCost: { type: Number, required: true },
     status: { type: String, default: "Pending" },
   },
   { timestamps: true }

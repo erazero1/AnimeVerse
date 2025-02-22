@@ -15,7 +15,9 @@ const animeSchema = new mongoose.Schema(
     Author: String,
     Score: Number,
     Rating: String,
-    purchases: Number
+    purchases: Number,
+    price: Number,
+    views: Number
   },
   { timestamps: true }
 );

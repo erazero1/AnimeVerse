@@ -6,7 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-
+    const addToCartBtn = document.getElementById('btn');
+    addToCartBtn.addEventListener('click', (e) => {
+        // Предотвращаем переход по ссылке карточки
+        e.preventDefault();
+        e.stopPropagation();
+        const title = document.getElementById('animeTitle').textContent
+        alert(`"${title}" added to Cart!`);
+    });
 
     fetch(`/api/animes/search?title=${title}`, {
         method: 'GET',
@@ -25,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('animeStatus').textContent = anime.status || '-';
             document.getElementById('animeType').textContent = anime.Type || '-';
             document.getElementById('animeYear').textContent = anime.Year || '-';
+            document.getElementById('animePrice').textContent = `$${anime.price}` || '-';
             document.getElementById('animeEpisodes').textContent = anime.Episodes || '-';
             document.getElementById('animeDuration').textContent = anime.Duration || '-';
             document.getElementById('animeStudio').textContent = anime.Studio || '-';
