@@ -1,6 +1,6 @@
 const Anime = require("../models/Anime");
 const User = require("../models/User");
-const { logUserActivity } = require("../helpers/activityLogger")
+const { logUserActivity } = require("../helpers/activityLogger");
 
 // Admin: Create anime
 exports.createAnime = async (req, res) => {
@@ -16,10 +16,10 @@ exports.createAnime = async (req, res) => {
 // For searching an anime by title
 exports.getAnimeByTitle = async (req, res) => {
   try {
-    let title = req.query.title || '';
+    let title = req.query.title || "";
     // Remove any surrounding quotes if present
-    title = title.replace(/^["']|["']$/g, '');
-    const anime = await Anime.findOne({ title: new RegExp(`^${title}$`, 'i') });
+    title = title.replace(/^["']|["']$/g, "");
+    const anime = await Anime.findOne({ title: new RegExp(`^${title}$`, "i") });
     if (!anime) {
       return res.status(404).json({ error: "Anime not found" });
     }
@@ -42,23 +42,19 @@ exports.getAnimes = async (req, res) => {
 
     const totalCount = await Anime.countDocuments({});
     const totalPages = Math.ceil(totalCount / limit);
-    
-    const animes = await Anime.find()
-      .skip(skipCount)
-      .limit(limit);
-      
+
+    const animes = await Anime.find().skip(skipCount).limit(limit);
+
     res.status(200).json({
       animes,
       totalPages,
       currentPage: page,
-      totalCount
+      totalCount,
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
-
-
 
 // Admin: Delete anime
 exports.deleteAnime = async (req, res) => {
@@ -96,22 +92,21 @@ exports.getAnalytics = async (req, res) => {
   }
 };
 
-
 // controllers/animeController.js
 
 exports.filterAnimes = async (req, res) => {
   try {
-    const { 
-      status, 
-      type, 
-      myList, 
-      sorting, 
-      yearFrom, 
-      yearTo, 
-      episodes, 
+    const {
+      status,
+      type,
+      myList,
+      sorting,
+      yearFrom,
+      yearTo,
+      episodes,
       duration,
       page,
-      limit
+      limit,
     } = req.body;
 
     // 1) Собираем query для фильтра (пример, как раньше)
@@ -153,8 +148,8 @@ exports.filterAnimes = async (req, res) => {
     }
 
     // 3) Пагинация (page, limit)
-    const currentPage = parseInt(page, 10) || 1;     // если не указано, страница = 1
-    const perPage = parseInt(limit, 10) || 20;      // если не указано, лимит = 20
+    const currentPage = parseInt(page, 10) || 1; // если не указано, страница = 1
+    const perPage = parseInt(limit, 10) || 20; // если не указано, лимит = 20
 
     const skipCount = (currentPage - 1) * perPage;
 
@@ -173,7 +168,7 @@ exports.filterAnimes = async (req, res) => {
       animes,
       totalPages,
       currentPage,
-      totalCount
+      totalCount,
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -183,15 +178,17 @@ exports.filterAnimes = async (req, res) => {
 exports.editAnimeById = async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedAnime = await Anime.findByIdAndUpdate(
-      id,
-      req.body,
-      { new: true, overwrite: true, runValidators: true }
-    );
+    const updatedAnime = await Anime.findByIdAndUpdate(id, req.body, {
+      new: true,
+      overwrite: true,
+      runValidators: true,
+    });
     if (!updatedAnime) {
       return res.status(404).json({ error: "Anime not found" });
     }
-    res.status(200).json({ message: "Anime updated successfully", anime: updatedAnime });
+    res
+      .status(200)
+      .json({ message: "Anime updated successfully", anime: updatedAnime });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
