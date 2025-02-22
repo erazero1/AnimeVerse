@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Analytics Dashboard</title>
+  <link rel="stylesheet" href="../css/analytics.css" />
+  <!-- Подключение библиотеки Chart.js (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="analytics-container">
+    <h1>Analytics Dashboard</h1>
+
+    <!-- Карточки с ключевыми метриками -->
+    <div class="metrics">
+      <div class="metric-card">
+        <h2>Total Sales</h2>
+        <p id="totalSales">0</p>
+      </div>
+      <div class="metric-card">
+        <h2>Most Viewed Anime</h2>
+        <p id="mostViewed">No Data</p>
+      </div>
+      <div class="metric-card">
+        <h2>Total Views</h2>
+        <p id="totalViews">0</p>
+      </div>
+    </div>
+
+    <!-- График покупок (пример) -->
+    <div class="chart-container">
+      <h2>Monthly Purchases</h2>
+      <canvas id="purchasesChart"></canvas>
+    </div>
+
+    <!-- График просмотров (пример) -->
+    <div class="chart-container">
+      <h2>Top 5 Viewed Anime</h2>
+      <canvas id="viewsChart"></canvas>
+    </div>
+
+  </div>
+
+  <script src="../js/analytics.js"></script>
+  <script src="../js/header.js"></script>
+</body>
+</html>

@@ -39,23 +39,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Контейнер для кнопок (зависит от того, авторизован пользователь или нет)
   let container;
   if (token) {
+    // Если пользователь авторизован
     container = document.createElement('div');
     container.className = 'user-menu';
-    
-    const profileLink = document.createElement('a');
-    profileLink.href = 'profile.html';
-    profileLink.className = 'btn profile-btn';
-    profileLink.textContent = 'Profile';
-    container.appendChild(profileLink);
-    
-    const myListLink = document.createElement('a');
-    myListLink.href = 'mylist.html';
-    myListLink.className = 'btn my-list-btn';
-    myListLink.textContent = 'My List';
-    container.appendChild(myListLink);
-    
+
+    // Ссылка на Orders (доступно всем авторизованным)
+    const ordersLink = document.createElement('a');
+    ordersLink.href = '/orders'; // Замените на реальный путь
+    ordersLink.className = 'btn orders-btn';
+    ordersLink.textContent = 'Orders';
+    container.appendChild(ordersLink);
+
+    // Кнопка Logout
     const logoutLink = document.createElement('a');
     logoutLink.href = '#';
     logoutLink.className = 'btn logout-btn';
@@ -66,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
       location.reload();
     });
     container.appendChild(logoutLink);
+
   } else {
     // Если пользователь не авторизован – создаем кнопки авторизации
     container = document.createElement('div');
@@ -80,14 +79,21 @@ document.addEventListener('DOMContentLoaded', () => {
   
   nav.appendChild(container);
 
-  // Если пользователь админ, добавляем ссылку на Admin Panel
+  // Если пользователь админ, добавляем ссылку на Admin Panel и Analytics
   if (userRole === 'admin') {
     const liAdmin = document.createElement('li');
     const adminLink = document.createElement('a');
-    adminLink.href = '/admin-panel';
+    adminLink.href = '/admin-panel'; 
     adminLink.textContent = 'Admin Panel';
     liAdmin.appendChild(adminLink);
     navList.appendChild(liAdmin);
+
+    const liAnalytics = document.createElement('li');
+    const analyticsLink = document.createElement('a');
+    analyticsLink.href = '/analytics'; // Замените на реальный путь
+    analyticsLink.textContent = 'Analytics';
+    liAnalytics.appendChild(analyticsLink);
+    navList.appendChild(liAnalytics);
   }
 
   // Вставляем header в начало body
