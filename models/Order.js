@@ -5,7 +5,11 @@ const orderSchema = new mongoose.Schema(
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     animes: [
       {
-        anime: { type: mongoose.Schema.Types.ObjectId, ref: "Anime", required: true },
+        anime: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Anime",
+          required: true,
+        },
         quantity: { type: Number, default: 1 },
       },
     ],

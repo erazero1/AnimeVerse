@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   activityLogs: [
     {
       action: { type: String, enum: ["view", "purchase", "search"] },
-      animeId: { type: mongoose.Schema.Types.ObjectId, ref: 'Anime' },
+      animeId: mongoose.Schema.Types.ObjectId,
       timestamp: { type: Date, default: Date.now },
     },
   ],
