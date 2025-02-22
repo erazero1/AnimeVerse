@@ -50,6 +50,10 @@ app.get("/admin-panel", (req, res) => {
   res.sendFile(path.join(__dirname, "public/pages", "admin.html"));
 });
 
+app.get("/analytics", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/pages", "analytics.html"));
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
