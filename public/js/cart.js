@@ -72,29 +72,29 @@ document.addEventListener('DOMContentLoaded', () => {
         // Допустим, для заказа нужен userId, а cartItems – это массив аниме
         // В модели Order: animes – массив объектов {anime: _id}
         // Нужно получить userId (например, из токена) – упрощённый вариант:
-        const userId = "1234567890abcdef"; // пример
+        const userId = localStorage.getItem('token'); // пример
 
         // Формируем массив { anime: item._id } для каждой позиции
-        const animesForOrder = cart.map(item => ({ anime: item._id }));
-
+        const animesForCart = cart.map(item => ({ anime: item._id }));
+        console.log(userId.id);
         // Отправляем на сервер
         try {
-            const response = await fetch('/api/orders', {
+            const response = await fetch('/api/cart/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': localStorage.getItem('token') // если требуется
                 },
                 body: JSON.stringify({
-                    user: userId,
-                    animes: animesForOrder
+                    user: userId.id,
+                    animes: animesForCart
                 })
             });
             const data = await response.json();
             if (!response.ok) {
-                throw new Error(data.error || 'Order creation failed');
+                throw new Error(data.error || 'Cart creation failed');
             }
-            alert('Order created successfully!');
+            alert('Cart created successfully!');
             // Очищаем корзину
             cart = [];
             localStorage.removeItem('cart');

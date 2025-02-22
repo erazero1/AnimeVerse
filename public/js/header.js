@@ -48,9 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ссылка на Orders (доступно всем авторизованным)
     const ordersLink = document.createElement('a');
-    ordersLink.href = '/orders'; // Замените на реальный путь
+    ordersLink.href = '/cart'; // Замените на реальный путь
     ordersLink.className = 'btn orders-btn';
-    ordersLink.textContent = 'Orders';
+    ordersLink.textContent = 'Cart';
     container.appendChild(ordersLink);
 
     // Кнопка Logout

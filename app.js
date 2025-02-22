@@ -24,11 +24,11 @@ mongoose
 // Routes
 const authRoutes = require("./routes/auth");
 const animeRoutes = require("./routes/anime");
-const orderRoutes = require("./routes/order");
+const cartRoutes = require("./routes/cart");
 
 app.use("/api/", authRoutes);
 app.use("/api/animes", animeRoutes);
-app.use("/api/orders", orderRoutes);
+app.use("/api/cart", cartRoutes);
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public/pages", "index.html"))
@@ -38,7 +38,7 @@ app.get("/auth", (req, res) => {
   res.sendFile(path.join(__dirname, "public/pages", "auth.html"))
 });
 
-app.get("/order", (req, res) => {
+app.get("/cart", (req, res) => {
   res.sendFile(path.join(__dirname, "public/pages", "cart.html"))
 });
 
