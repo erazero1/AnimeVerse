@@ -70,14 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 4) Обработчик Checkout
     checkoutBtn.addEventListener('click', async () => {
-        // Допустим, для заказа нужен userId, а cartItems – это массив аниме
-        // В модели Order: animes – массив объектов {anime: _id}
-        // Нужно получить userId (например, из токена) – упрощённый вариант:
-        const userId = localStorage.getItem('token'); // пример
 
         // Формируем массив { anime: item._id } для каждой позиции
         const animesForCart = cart.map(item => ({ anime: item._id }));
-        console.log(userId.id);
         // Отправляем на сервер
         try {
             const response = await fetch('/api/cart/', {
@@ -87,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Authorization': localStorage.getItem('token') // если требуется
                 },
                 body: JSON.stringify({
-                    user: userId.id,
                     animes: animesForCart
                 })
             });
