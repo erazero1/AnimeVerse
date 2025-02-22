@@ -6,7 +6,6 @@ const { authenticateUser } = require('../middlewares/auth');
 // Create a new cart for the authenticated user
 router.post("/", authenticateUser, cartController.createCart);
 
-// Get the cart for a specific user (e.g., via userId parameter)
 // Alternatively, you can use req.user._id if your authentication middleware attaches the user.
 router.get("/:userId", authenticateUser, cartController.getCartByUser);
 

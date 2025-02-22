@@ -2,10 +2,8 @@ const Cart = require('../models/Cart');
 
 exports.createCart = async (req, res) => {
   try {
-    var { user, animes } = req.body;
-    if (!user) {
-        user = req.user.id
-    }
+    const {animes} = req.body;
+    const user = req.user.id
     let cart = await Cart.findOne({ user, status: "Pending" });
     if (cart) {
       return res.status(400).json({ error: "Cart already exists for this user" });
