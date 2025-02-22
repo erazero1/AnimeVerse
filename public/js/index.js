@@ -206,8 +206,28 @@ document.addEventListener('DOMContentLoaded', () => {
       addToCartBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        alert(`"${anime.title}" added to Cart!`);
+      
+        // 1) Получаем массив корзины из LocalStorage (или пустой)
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      
+        // 2) Проверяем, есть ли уже в корзине данное аниме:
+        // (если не хотите дублировать, можно проверять по _id)
+        const found = cart.find(item => item._id === anime._id);
+        if (!found) {
+          // 3) Если аниме ещё нет, добавляем его
+          cart.push({
+            _id: anime._id,
+            title: anime.title,
+            cover: anime.cover,
+            price: anime.price
+          });
+          localStorage.setItem('cart', JSON.stringify(cart));
+          alert(`"${anime.title}" added to Cart!`);
+        } else {
+          alert(`${anime.title} already in the cart!`);
+        }
       });
+      
       card.appendChild(addToCartBtn);
   
       animeGrid.appendChild(card);

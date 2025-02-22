@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartItemsTbody = document.getElementById('cartItems');
     const cartTotalSpan = document.getElementById('cartTotal');
     const checkoutBtn = document.getElementById('checkoutBtn');
+    
 
     // 1) Получаем корзину из localStorage (или другого места)
     // Предположим, что в localStorage хранится массив объектов вида:
